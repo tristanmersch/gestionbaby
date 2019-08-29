@@ -18,9 +18,12 @@ La configuration de base est sur du localhost:8080 , si ça ne convient pas il f
 
 # CREATION DE LA BD :
 
-Pour initialiser la BD jouer le fichier sql/babyfoot.sql . Rien de compliqué :
+Pour initialiser la BD jouer le fichier sql/babyfoot.sql . Détails :
+
 -BDD nommé "babyfoot"
+
 -schéma nommé "babyfoot"
+
 -3 tables nommées PartieParUtilisateur,joueur et partie
 
 
