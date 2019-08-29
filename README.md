@@ -1,8 +1,8 @@
 # Modules node js
  
-npm install http
-npm install fs
-npm install express
+npm install http 
+npm install fs 
+npm install express 
 npm install serve-favicon
 npm install pg
 npm install socket.io
