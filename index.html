@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <link rel="stylesheet" type="text/css" href="css/chat.css" />
+  <link rel="stylesheet" type="text/css" href="css/bootstrap.css" />
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="/chat.js"></script>
+  <script src="/gestionBabyFoot.js"></script>
+  <title>Baby Foot</title>
+</head>
+<body>
+  <input type="hidden" id="socket_id" value=""/>
+  <!-- Partie principale de la page !-->
+  <div id="main-header" class="header-main"><br>Gestion collaborative des parties de baby-foot
+  </div>
+  <div >
+    <div class="container main">
+      <div class="row " style="padding-top:40px;">
+
+        <div class="panel panel-info" id="saisieRencontres">
+          <div class="panel-heading"><img src="img/baby.png" width="40px"/> PARTIES</div>
+          <div class="panel-body">
+            <label>Solo <input  type="radio" checked name="modePartie" value="1" onclick="javascript:gererChampsJoueurs(true)"></label>
+            <label> Duo <input  type="radio" name="modePartie" value="2" onclick="javascript:gererChampsJoueurs(false)"></label><br/>
+            <label id="solo"> <input class="form-control smallInput" type="text" name="joueur1" onclick="this.value=''" value="Joueur1"/> VS <input type="text" class="form-control smallInput" name="joueur2" onclick="this.value=''" value="Joueur2"/> </label>
+            <label style="display:none;" id="duo"> <input class="form-control smallInput" type="text" name="joueur1" onclick="this.value=''" value="Joueur1"/> et <input class="form-control smallInput" type="text" name="joueur2" onclick="this.value=''" value="Joueur2"/> VS <input type="text" class="form-control smallInput" name="joueur3" onclick="this.value=''" value="Joueur3"/> et <input type="text" class="form-control smallInput" name="joueur4" onclick="this.value=''" value="Joueur4"/> </label>
+            <button id="creerPartie" class="btn btn-info"  onclick="javascript:creerPartie();">Créer une partie</button>
+          </div>
+          <h4 style="margin-left:15px">Les parties <span id="libelleEnCours">( <span id="cptPartiesEnCours"></span> en cours)</span></h4>
+          <div id="affichageRencontres" class="panel-body">
+          </div>
+        </div></div>
+      </div>
+
+      <!-- Partie chat !-->
+      <div class="container main">
+        <div class="row " style="padding-top:40px;">
+          <div class="col-md-8">
+            <div class="panel panel-info">
+              <div class="panel-heading">
+                <img src="img/chat.png" width="40px"/> CHAT  <input  type="text" class="form-control smallInput" id="user_chat"/>&nbsp;&nbsp; <button class="btn btn-info" name="connect" onclick="javascript:connect()" id="connect">Se connecter</button>
+                <button class="btn btn-info" style="display:none;" id="deconnexion" onclick="javascript:disconnect()">Se déconnecter</button>
+              </div>
+              <div class="panel-body">
+                <ul class="media-list" id="listeMessageChat"></ul>
+              </div>
+              <div class="panel-footer">
+                <div class="input-group">
+                  <input type="text" disabled class="form-control" placeholder="Entrer un message" id="messageChat"/>
+                  <span class="input-group-btn">
+                    <button class="btn btn-info"  disabled id="envoyerMessage" onclick="javascript:envoyerMessage();">ENVOYER</button>
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="panel panel-primary">
+              <div class="panel-heading">
+                <img src="img/user.png" width="30px"/> EN LIGNE
+              </div>
+              <div class="panel-body" id="affichageUsers">
+                <ul class="media-list" id="listeUtilisateursEnLigne"></ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+  </html>
