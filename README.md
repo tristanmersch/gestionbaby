@@ -42,3 +42,21 @@ Chat :
 -Message "public"/Message privé (utilisation du @ devant le login)
 
 -Affichage de la liste des utilisateurs connectés
+
+# Analyse du code
+
+server.js : contient le code serveur(tout est basé sur Socket.IO). Je ne l'ai pas subdivisé en plusieurs fichiers étant donné qu'il n'est pas énorme.
+
+gestionBabyFoot.js : code client pour le bloc "gestion des parties de babyfoot"
+
+chat.js : code client pour le chat
+
+index.html : seule page HTML de l'appli
+
+css/bootstrap.css : template css que j'ai piqué avec quelque ajustements rajoutés
+
+css/chat.css : ajustement pour le chat
+
+(J'admet ne pas avoir fait enormément d'effort pour bien structurer le css)
+
+Bonne change !
