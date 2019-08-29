@@ -18,6 +18,8 @@ La configuration de base est sur du localhost:8080 , si ça ne convient pas il f
 
 # CREATION DE LA BD (POSTGRESQL 11) :
 
+Chaine de connexion utilisée dans l'appli(server.js) : "pg:postgres:password@localhost:5432/babyfoot"
+
 Pour initialiser la BD jouer le fichier sql/babyfoot.sql . Détails :
 
 -BDD nommé "babyfoot"
