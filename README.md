@@ -16,7 +16,7 @@ npm install session.socket.io
 
 La configuration de base est sur du localhost:8080 , si ça ne convient pas il faudrait changer dans server.js et dans public/chat.js
 
-# CREATION DE LA BD :
+# CREATION DE LA BD (POSTGRESQL 11) :
 
 Pour initialiser la BD jouer le fichier sql/babyfoot.sql . Détails :
 
