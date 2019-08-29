@@ -1,4 +1,4 @@
-# gestionbab
+# Modules node js
  
 npm install http
 npm install fs
@@ -10,7 +10,7 @@ npm install session.socket.io
 
 La configuration de base est sur du localhost:8080 , si ça ne convient pas il faudrait changer dans server.js et dans public/chat.js
 
-#CREATION DE LA BD :
+# CREATION DE LA BD :
 
 Pour initialiser la BD jouer le fichier sql/babyfoot.sql . Rien de compliqué :
 -BDD nommé "babyfoot"
@@ -18,7 +18,7 @@ Pour initialiser la BD jouer le fichier sql/babyfoot.sql . Rien de compliqué :
 -3 tables nommées PartieParUtilisateur,joueur et partie
 
 
-#Détail des fonctionnalités
+# Détail des fonctionnalités (voir les images dans le répértoire docs qui reprennent ces scenarios )
 
 Partie Baby foot :
 -Création de partie en solo
