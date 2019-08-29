@@ -30,14 +30,15 @@ Pour initialiser la BD jouer le fichier sql/babyfoot.sql . Détails :
 # Détail des fonctionnalités (voir les images dans le répértoire docs qui reprennent ces scenarios )
 
 Partie Baby foot :
--Création de partie en solo
--Création de partie en duo
--Terminer une partie
--Supprimer une partie
+
+-Création de partie en solo et en duo
+
+-Terminer et Supprimer une partie
 
 Chat :
--Connexion
--Deconnexion
--Message "public"
--Message privée (utilisation du @ devant le login)
+
+-Connexion/Deconnexion
+
+-Message "public"/Message privée (utilisation du @ devant le login)
+
 -Affichage de la liste des utilisateurs connectés
