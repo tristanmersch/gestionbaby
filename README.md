@@ -3,10 +3,15 @@
 npm install http  
 
 npm install fs 
+
 npm install express 
+
 npm install serve-favicon
+
 npm install pg
+
 npm install socket.io
+
 npm install session.socket.io
 
 La configuration de base est sur du localhost:8080 , si ça ne convient pas il faudrait changer dans server.js et dans public/chat.js
