@@ -39,6 +39,6 @@ Chat :
 
 -Connexion/Deconnexion
 
--Message "public"/Message privée (utilisation du @ devant le login)
+-Message "public"/Message privé (utilisation du @ devant le login)
 
 -Affichage de la liste des utilisateurs connectés
