@@ -27,17 +27,19 @@ OWNER to postgres;
 
 CREATE TABLE babyfoot.partie
 (
-  id integer NOT NULL GENERATED ALWAYS AS IDENTITY ( INCREMENT 1 START 1 MINVALUE 1 MAXVALUE 2147483647 CACHE 1 ),
-  "dateCreation" date,
-  "dateDebut" date NOT NULL,
-  statut character varying(100) COLLATE pg_catalog."default" NOT NULL DEFAULT 'A JOUER'::character varying,
-  "dateSuppression" date,
-  mode integer NOT NULL DEFAULT 1,
-  "dateFin" date,
-  CONSTRAINT partie_pkey PRIMARY KEY (id)
+    id integer NOT NULL GENERATED ALWAYS AS IDENTITY ( INCREMENT 1 START 1 MINVALUE 1 MAXVALUE 2147483647 CACHE 1 ),
+    "dateCreation" date,
+    "dateDebut" date NOT NULL,
+    statut character varying(100) COLLATE pg_catalog."default" NOT NULL DEFAULT 'A JOUER'::character varying,
+    "dateSuppression" date,
+    mode integer NOT NULL DEFAULT 1,
+    "dateFin" date,
+    score1 integer,
+    score2 integer,
+    CONSTRAINT partie_pkey PRIMARY KEY (id)
 )
 WITH (
-  OIDS = FALSE
+    OIDS = FALSE
 )
 TABLESPACE pg_default;
 

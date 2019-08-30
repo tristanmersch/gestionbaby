@@ -5,7 +5,7 @@ La liste des rencontres est récuperé de façon "brutes", il faut formater à c
 socket.on('afficherRencontres', function(rencontres) {
   var histoId ;
   var cptJoueurs = 1;
-  var isModeSolo=false,isCloture=false,cptPartiesEnCours=0;chaine="";
+  var isModeSolo=false,isCloture=false,cptPartiesEnCours=0;chaine="",score=0,chaineScore=" VS ";
   document.getElementById('affichageRencontres').innerHTML='';
   for(var i=0;i<rencontres.length;i++)
   {
@@ -14,13 +14,16 @@ socket.on('afficherRencontres', function(rencontres) {
     if(cptJoueurs == 1){
       isModeSolo = rencontres[i].isModeSolo
       isCloture = rencontres[i].dateFin != null;
+	  score = rencontres[i].score1+'-'+rencontres[i].score2;
+	  if(!isCloture)
+		chaineScore = '  <input type="text" size=1 id="'+rencontres[i].id+'score1"/> VS <input size=1 type="text" id="'+rencontres[i].id+'score2"/>  ';
     }
     //Dernier joueurs de la partie
     if(cptJoueurs == (isModeSolo ? 2 : 4 )){
       if(isModeSolo)
-      chaine+=fieldsetInitial.innerHTML+'<p class="rencontre"><label class="joueurs">'+rencontres[i-1].nomJoueur +' VS '+rencontres[i].nomJoueur+'</label>';
+      chaine+=fieldsetInitial.innerHTML+'<p class="rencontre"><label class="joueurs">'+rencontres[i-1].nomJoueur +chaineScore+rencontres[i].nomJoueur+'</label>';
       else
-      chaine+=fieldsetInitial.innerHTML+'<p class="rencontre"><label class="joueurs">'+rencontres[i-3].nomJoueur +' et '+rencontres[i-2].nomJoueur+' VS '+rencontres[i-1].nomJoueur +' et '+rencontres[i].nomJoueur+'</label>';
+      chaine+=fieldsetInitial.innerHTML+'<p class="rencontre"><label class="joueurs">'+rencontres[i-3].nomJoueur +' et '+rencontres[i-2].nomJoueur+chaineScore+rencontres[i-1].nomJoueur +' et '+rencontres[i].nomJoueur+'</label>';
 
       //Si la partie est en cours alors on affiche les boutons de suppression et de cloture
       if(!isCloture){
@@ -29,7 +32,7 @@ socket.on('afficherRencontres', function(rencontres) {
       }
       else{
         var dateCourante = new Date(rencontres[i].dateFin);
-        chaine+='<i>(Terminée le '+ dateCourante.getDate()+'/'+dateCourante.getMonth()+'/'+dateCourante.getFullYear()+')</i>';
+        chaine+='<i>Terminée le '+ dateCourante.getDate()+'/'+dateCourante.getMonth()+'/'+dateCourante.getFullYear()+' sur le score de <b>'+score+'</b></i>';
       }
       fieldsetInitial.innerHTML=chaine;
       cptJoueurs=0;
@@ -44,8 +47,25 @@ function supprimerPartie(idPartieASupprimer){
   socket.emit('supprimerPartie',idPartieASupprimer);
 }
 
+
 function cloturerPartie(idPartieASupprimer){
-  socket.emit('cloturerPartie',idPartieASupprimer);
+
+  var score1 = document.getElementById(idPartieASupprimer+'score1').value;
+  var score2 = document.getElementById(idPartieASupprimer+'score2').value;
+
+  var chiffresOk=score1.length == 1 && score2.length == 1;
+  
+  score1=parseInt(score1);
+  score2=parseInt(score2);
+
+  var score1ok=chiffresOk && score1 >= 0 && score1 <= 6; 
+  var score2ok=chiffresOk && score2 >= 0 && score2 <= 6; 
+  var scoresOK = score1ok && score2ok && (score1 == 6 || score2 == 6) && score1+score2 < 12;
+  if(!scoresOK){
+	alert('Saisissez un chiffre entre 0 et 6');
+	return;
+  }
+  socket.emit('cloturerPartie',{idPartieASupprimer : idPartieASupprimer, score1 : score1, score2 : score2});
 }
 /*Controle basique pour verifier que le champ est bien rempli
 @Todo faire la différence entre un nom de user existant en BD et un nouveau

@@ -12,9 +12,9 @@ const REQUETES_SQL = {
 	sqlCreerPartie : 'INSERT INTO babyfoot.partie("dateCreation", "dateDebut", mode) VALUES ($1, $2, $3) RETURNING id;',
 	sqlCreerJoueur : 'INSERT INTO babyfoot.joueur("dateCreation", nom) VALUES ($1, $2) RETURNING id;',
 	sqlCreerPartieParJoueur : 'INSERT INTO babyfoot."PartieParUtilisateur"("idPartie", "idJoueur") VALUES ($1, $2);',
-	sqlPartieJoueur : 'SELECT "PartieParUtilisateur"."idPartie",nom,mode,joueur.id,partie."dateFin" FROM babyfoot."PartieParUtilisateur" join babyfoot.partie as partie on "PartieParUtilisateur"."idPartie" = partie.id join babyfoot.joueur on "PartieParUtilisateur"."idJoueur" = joueur.id where partie."dateSuppression"  is null',
+	sqlPartieJoueur : 'SELECT "PartieParUtilisateur"."idPartie",nom,mode,joueur.id,partie."dateFin",partie.score1,partie.score2 FROM babyfoot."PartieParUtilisateur" join babyfoot.partie as partie on "PartieParUtilisateur"."idPartie" = partie.id join babyfoot.joueur on "PartieParUtilisateur"."idJoueur" = joueur.id where partie."dateSuppression"  is null',
 	sqlSupprimerPartie : 'UPDATE babyfoot.partie set "dateSuppression"=current_date where id=$1',
-	sqlTerminerPartie : 'UPDATE babyfoot.partie set "dateFin"=current_date where id=$1'
+	sqlTerminerPartie : 'UPDATE babyfoot.partie set "dateFin"=current_date,score1=$1,score2=$2 where id=$3'
 	}
 
 app.use(express.static('public'));
@@ -41,9 +41,9 @@ Cloturer une partie = remplir la date de fin de la partie
 @Todo
 Il faudrait pouvoir saisir le/les vainqueurs à cet endroit lorsque la partie est cloturée
 */
-function cloturerPartie(idPartie,socketId){
-	console.log('suppression de la partie '+idPartie);
-	client.query(REQUETES_SQL.sqlTerminerPartie,[idPartie]).then (
+function cloturerPartie(partie,socketId){
+	console.log('suppression de la partie '+partie.idPartieASupprimer);
+	client.query(REQUETES_SQL.sqlTerminerPartie,[partie.score1,partie.score2,partie.idPartieASupprimer]).then (
 		res => gererJoueur(socketId)
 	).catch(e=> console.log(e.stack))
 }
@@ -162,8 +162,8 @@ com.on('connection', function (socket) {
 		supprimerPartie(idPartieASupprimer,socket.id);
 	});
 
-	socket.on('cloturerPartie', function(idPartieASupprimer){
-		cloturerPartie(idPartieASupprimer,socket.id);
+	socket.on('cloturerPartie', function(partie){
+		cloturerPartie(partie,socket.id);
 	});
 
 	socket.on('deconnexion', function(socketId){
