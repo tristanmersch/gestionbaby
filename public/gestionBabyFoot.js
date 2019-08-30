@@ -27,7 +27,7 @@ socket.on('afficherRencontres', function(rencontres) {
 
       //Si la partie est en cours alors on affiche les boutons de suppression et de cloture
       if(!isCloture){
-        chaine+='<button class="btn btn-info suppPartie" onclick="javascript:supprimerPartie('+rencontres[i].id+');">Supprimer partie</button>    <button class="btn btn-info suppPartie" onclick="javascript:cloturerPartie('+rencontres[i].id+');">Terminer partie</button></p>';
+        chaine+='<button class="btn btn-info suppPartie" onclick="javascript:supprimerPartie('+rencontres[i].id+');">Supprimer</button>    <button class="btn btn-info suppPartie" onclick="javascript:cloturerPartie('+rencontres[i].id+');">Terminer</button></p>';
         cptPartiesEnCours++;
       }
       else{
