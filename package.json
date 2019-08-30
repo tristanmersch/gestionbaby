@@ -1,5 +1,11 @@
 {
   "requires": true,
+  "name": "babyfoot",
+  "description": "babyfoot",
+  "version": "1.0.0",
+  "engines": {
+    "node": "10.16.0"
+  },
   "lockfileVersion": 1,
   "dependencies": {
     "accepts": {
