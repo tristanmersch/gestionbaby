@@ -41,6 +41,8 @@ socket.on('afficherRencontres', function(rencontres) {
     cptJoueurs++;
   }
   document.getElementById('cptPartiesEnCours').innerHTML=cptPartiesEnCours
+  document.getElementById('affichageRencontres').scrollTop = document.getElementById('affichageRencontres').scrollHeight;
+
 });
 
 function supprimerPartie(idPartieASupprimer){
