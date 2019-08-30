@@ -48,6 +48,7 @@ socket.on('afficherMessageChat', function(message) {
 	var fieldsetInitial = document.getElementById('listeMessageChat');
 	fieldsetInitial.innerHTML=fieldsetInitial.innerHTML+formaterMessageHTML(message.message,message.user,message.heure,false);
 	document.getElementById('messageChat').value ='';
+	document.getElementById('blocMessageChat').scrollTop = document.getElementById('blocMessageChat').scrollHeight;
 });
 
 //Mecanisme d'erreur géré avec une alert
@@ -90,3 +91,10 @@ function disconnect(){
 	document.getElementById('listeMessageChat').innerHTML='';
 	document.getElementById('envoyerMessage').disabled = true;
 };
+document.addEventListener("DOMContentLoaded", function(event) { 
+  document.getElementById("messageChat").addEventListener("keyup", function(event) {
+  if (event.keyCode === 13) {
+    document.getElementById('envoyerMessage').click();
+  }
+  });
+});
