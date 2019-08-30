@@ -103,6 +103,7 @@ function supprimerPartie(idPartie,socketId){
 
 
 com.on('connection', function (socket) {
+	socket.emit('port',process.env.PORT);
 	//Connexion sur le chat
 	socket.on('auth', function (user) {
 		if(session.socketByUsers.has(user)){
