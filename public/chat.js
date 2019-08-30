@@ -2,8 +2,7 @@
 Ce fichier permet de gerer tous les appels websockets du chat+la logique front
 **/
 
-var socket = io.connect('http://localhost:3333');
-
+var socket = io.connect(window.location.hostname);
 
 //Premier message aprés connexion
 socket.on('premierMessage', function(message) {
