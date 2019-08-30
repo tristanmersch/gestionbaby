@@ -83,7 +83,7 @@ function gererJoueur(socketId){
 		var  partiesCourante= new Array();
 		for (var joueur in joueurs) {
 			var modeSolo = joueurs[joueur].mode == 1;
-			partiesCourante.push({nomJoueur : joueurs[joueur].nom , id : joueurs[joueur].idPartie , isModeSolo : modeSolo , dateFin : joueurs[joueur].dateFin });
+			partiesCourante.push({nomJoueur : joueurs[joueur].nom , id : joueurs[joueur].idPartie , isModeSolo : modeSolo , dateFin : joueurs[joueur].dateFin , score1 : joueurs[joueur].score1 , score2 : joueurs[joueur].score2 });
 		}
 		socketCourante.broadcast.emit('afficherRencontres', partiesCourante);
 		socketCourante.emit('afficherRencontres', partiesCourante);
