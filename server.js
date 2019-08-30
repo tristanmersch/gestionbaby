@@ -5,7 +5,6 @@ var express = require('express');
 var favicon = require('serve-favicon');
 var pg = require("pg");
 var app = express();
-//var connectionString = "pg:postgres:password@localhost:5432/babyfoot";
 var connectionString = "pg:rkobmunazpbgxx:095c47968091162f8e5de437cd75f13c6bdb65ea6fde1da7a5aac5d78e85f0e1@localhost:5432/d44av1idluf9el";
 
 var client = new pg.Client(connectionString);
@@ -21,7 +20,6 @@ const REQUETES_SQL = {
 
 app.use(express.static('public'));
 
-// viewed at http://localhost:8080
 app.get('/', function(req, res) {
 	fs.readFile('./index.html', 'utf-8', function(error, content) {
 		res.writeHead(200, {"Content-Type": "text/html"});
