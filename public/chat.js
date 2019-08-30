@@ -2,10 +2,10 @@
 Ce fichier permet de gerer tous les appels websockets du chat+la logique front
 **/
 
-var socket;
+var socket = io.connect('http://localhost:3333');
+
 socket.on('port',function(port){
-socket=io.connect('http://localhost:'+port);
-});
+
 //Premier message aprés connexion
 socket.on('premierMessage', function(message) {
 	document.getElementById('user_chat').style.display ='none'
