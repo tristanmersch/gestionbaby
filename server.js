@@ -5,8 +5,7 @@ var express = require('express');
 var favicon = require('serve-favicon');
 var pg = require("pg");
 var app = express();
-var connectionString = "pg:rkobmunazpbgxx:095c47968091162f8e5de437cd75f13c6bdb65ea6fde1da7a5aac5d78e85f0e1@localhost:5432/d44av1idluf9el";
-
+var connectionString = "pg:rkobmunazpbgxx:095c47968091162f8e5de437cd75f13c6bdb65ea6fde1da7a5aac5d78e85f0e1@ec2-79-125-2-142.eu-west-1.compute.amazonaws.com:5432/d44av1idluf9el";
 var client = new pg.Client(connectionString);
 const messageAccueil = 'Bonjour $1, Tu peux envoyer des messages publics mais aussi privés en utilisant le @ (Ex: pour un utilisateur toto : @toto bonjour mon ami)'
 const REQUETES_SQL = {
