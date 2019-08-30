@@ -10,31 +10,6 @@ CONNECTION LIMIT = -1;
 CREATE SCHEMA babyfoot
 AUTHORIZATION postgres;
 
-
-CREATE TABLE babyfoot."PartieParUtilisateur"
-(
-  id integer NOT NULL GENERATED ALWAYS AS IDENTITY ( INCREMENT 1 START 1 MINVALUE 1 MAXVALUE 2147483647 CACHE 1 ),
-  "idPartie" integer NOT NULL,
-  "idJoueur" integer NOT NULL,
-  CONSTRAINT "PartieParUtilisateur_pkey" PRIMARY KEY (id),
-  CONSTRAINT "idJoueur_fk" FOREIGN KEY ("idJoueur")
-  REFERENCES babyfoot.joueur (id) MATCH SIMPLE
-  ON UPDATE NO ACTION
-  ON DELETE NO ACTION,
-  CONSTRAINT "id_Partie_fk" FOREIGN KEY ("idPartie")
-  REFERENCES babyfoot.partie (id) MATCH SIMPLE
-  ON UPDATE NO ACTION
-  ON DELETE NO ACTION
-)
-WITH (
-  OIDS = FALSE
-)
-TABLESPACE pg_default;
-
-ALTER TABLE babyfoot."PartieParUtilisateur"
-OWNER to postgres;
-
-
 CREATE TABLE babyfoot.joueur
 (
   id integer NOT NULL GENERATED ALWAYS AS IDENTITY ( INCREMENT 1 START 1 MINVALUE 1 MAXVALUE 2147483647 CACHE 1 ),
@@ -67,4 +42,27 @@ WITH (
 TABLESPACE pg_default;
 
 ALTER TABLE babyfoot.partie
+OWNER to postgres;
+
+CREATE TABLE babyfoot."PartieParUtilisateur"
+(
+  id integer NOT NULL GENERATED ALWAYS AS IDENTITY ( INCREMENT 1 START 1 MINVALUE 1 MAXVALUE 2147483647 CACHE 1 ),
+  "idPartie" integer NOT NULL,
+  "idJoueur" integer NOT NULL,
+  CONSTRAINT "PartieParUtilisateur_pkey" PRIMARY KEY (id),
+  CONSTRAINT "idJoueur_fk" FOREIGN KEY ("idJoueur")
+  REFERENCES babyfoot.joueur (id) MATCH SIMPLE
+  ON UPDATE NO ACTION
+  ON DELETE NO ACTION,
+  CONSTRAINT "id_Partie_fk" FOREIGN KEY ("idPartie")
+  REFERENCES babyfoot.partie (id) MATCH SIMPLE
+  ON UPDATE NO ACTION
+  ON DELETE NO ACTION
+)
+WITH (
+  OIDS = FALSE
+)
+TABLESPACE pg_default;
+
+ALTER TABLE babyfoot."PartieParUtilisateur"
 OWNER to postgres;
