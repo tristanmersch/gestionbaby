@@ -14,7 +14,9 @@ npm install socket.io
 
 npm install session.socket.io
 
-La configuration de base est sur du localhost:8080 , si ça ne convient pas il faudrait changer dans server.js et dans public/chat.js
+# HEROKU
+
+dans le code, le user/password/host sont lié à Heroku, il faudra les changer au début début du server.js pour une utilisation en local
 
 # CREATION DE LA BD (POSTGRESQL 11) :
 
