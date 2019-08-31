@@ -63,6 +63,6 @@ index.html : seule page HTML de l'appli
 
 css/bootstrap.css : template css que j'ai piqué avec quelque ajustements rajoutés
 
-css/chat.css : ajustement pour le chat
+css/custom.css : css ajouté
 
 Bonne change !
