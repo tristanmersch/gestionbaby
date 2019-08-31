@@ -1,0 +1,77 @@
+.main
+{
+  width:80%;
+}
+
+.chat{
+  width:20%;
+  border : 1px solid black;
+}
+
+.chat>div:first-child{
+  padding:5px;
+}
+
+.chat>div#texte{ 
+  height:300px;
+  border : 1px dashed black;
+}
+
+.chat>div#message{
+  height:100px;
+  border : 1px dashed red;
+}
+
+.chat >div#message > textarea{
+  margin: 0px; width: 373px; height: 98px;
+}
+
+.chat > div#texte > p.messageUserCourant
+{
+  color:red;
+}
+
+.chat > div#texte > p.messageSysteme
+{
+  color:blue;
+}
+
+#user_chat
+{
+  margin-left:5%;
+}
+
+.rencontre
+{
+  color:black;
+}
+
+.joueurs
+{
+  width:400px;
+}
+body{
+  background-color: #F6F8FA;
+}
+
+html, body {
+  font-family: 'Roboto', sans-serif;
+  font-weight: 400;
+}
+
+#affichageRencontres
+{
+  height: 550px;
+  overflow-y: auto;
+}
+
+#affichageUsers
+{
+  height: 300px;
+  overflow-y: auto;
+}
+
+#libelleEnCours
+{
+color : #428bca;
+}
