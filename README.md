@@ -1,4 +1,4 @@
-# Modules node js
+# détails des modules node js
  
 npm install http  
 
@@ -49,7 +49,11 @@ Chat :
 
 # Analyse du code
 
-server.js : contient le code serveur(tout est basé sur Socket.IO). Je ne l'ai pas subdivisé en plusieurs fichiers étant donné qu'il n'est pas énorme.
+server.js : contient le code serveur(tout est basé sur Socket.IO). 
+
+bd.js : informations de connexion à la BD + stockage de requètes SQL
+
+message.js : variabilisation des messages à afficher dans l'application
 
 gestionBabyFoot.js : code client pour le bloc "gestion des parties de babyfoot"
 
