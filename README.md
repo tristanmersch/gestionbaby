@@ -1,5 +1,5 @@
 # détails des modules node js
- 
+
 npm install http  
 
 npm install fs 
@@ -14,15 +14,17 @@ npm install socket.io
 
 npm install session.socket.io
 
+(Un npm intall du package.json est aussi possible)
+
 # HEROKU
 
-dans le code, le user/password/host sont lié à Heroku, il faudra les changer au début début du server.js pour une utilisation en local
+dans le code, le user/password/host sont lié à Heroku, il faudra les changer dans le bd.js pour une utilisation en local
 
 # CREATION DE LA BD (POSTGRESQL 11) :
 
-Chaine de connexion utilisée dans l'appli(server.js) : "pg:postgres:password@localhost:5432/babyfoot"
+Pour initialiser la BD jouer le fichier sql/babyfoot.sql(dans ce script le user de base est postgres, à changer selon le user désiré).
 
-Pour initialiser la BD jouer le fichier sql/babyfoot.sql . Détails :
+Détails :
 
 -BDD nommé "babyfoot"
 
@@ -37,7 +39,11 @@ Partie Baby foot :
 
 -Création de partie en solo et en duo
 
--Terminer et Supprimer une partie
+-Supprimer une partie
+
+-Terminer une partie + gestion du score de la partie
+
+-Affichage des parties + compteurs de parties en cours
 
 Chat :
 
@@ -63,6 +69,6 @@ index.html : seule page HTML de l'appli
 
 css/bootstrap.css : template css que j'ai piqué avec quelque ajustements rajoutés
 
-css/chat.css : ajustement pour le chat
+css/custom.css : css ajouté
 
 Bonne change !
