@@ -5,18 +5,9 @@ var express = require('express');
 var favicon = require('serve-favicon');
 var pg = require("pg");
 var app = express();
-var connectionString = "pg:rkobmunazpbgxx:095c47968091162f8e5de437cd75f13c6bdb65ea6fde1da7a5aac5d78e85f0e1@ec2-79-125-2-142.eu-west-1.compute.amazonaws.com:5432/d44av1idluf9el";
-var client = new pg.Client(connectionString);
-const messageAccueil = 'Bonjour $1, Tu peux envoyer des messages publics mais aussi privés en utilisant le @ (Ex: pour un utilisateur toto : @toto bonjour mon ami)'
-const REQUETES_SQL = {
-	sqlCreerPartie : 'INSERT INTO babyfoot.partie("dateCreation", "dateDebut", mode) VALUES ($1, $2, $3) RETURNING id;',
-	sqlCreerJoueur : 'INSERT INTO babyfoot.joueur("dateCreation", nom) VALUES ($1, $2) RETURNING id;',
-	sqlCreerPartieParJoueur : 'INSERT INTO babyfoot."PartieParUtilisateur"("idPartie", "idJoueur") VALUES ($1, $2);',
-	sqlPartieJoueur : 'SELECT "PartieParUtilisateur"."idPartie",nom,mode,joueur.id,partie."dateFin",partie.score1,partie.score2 FROM babyfoot."PartieParUtilisateur" join babyfoot.partie as partie on "PartieParUtilisateur"."idPartie" = partie.id join babyfoot.joueur on "PartieParUtilisateur"."idJoueur" = joueur.id where partie."dateSuppression"  is null',
-	sqlSupprimerPartie : 'UPDATE babyfoot.partie set "dateSuppression"=current_date where id=$1',
-	sqlTerminerPartie : 'UPDATE babyfoot.partie set "dateFin"=current_date,score1=$1,score2=$2 where id=$3'
-	}
-
+eval(fs.readFileSync('bd.js')+'','utf-8');
+eval(fs.readFileSync('message.js')+'','utf-8');
+var client = new pg.Client(PARAMS_BD.connectionStringBd);
 app.use(express.static('public'));
 
 app.get('/', function(req, res) {
@@ -88,7 +79,7 @@ function gererJoueur(socketId){
 		socketCourante.broadcast.emit('afficherRencontres', partiesCourante);
 		socketCourante.emit('afficherRencontres', partiesCourante);
 	}
-	client.query(REQUETES_SQL.sqlPartieJoueur).then (
+	client.query(REQUETES_SQL.sqlAfficherPartie).then (
 		res => afficherJoueur(res.rows,socketId)
 	).catch(e=> console.log(e.stack))
 }
@@ -103,19 +94,17 @@ function supprimerPartie(idPartie,socketId){
 
 
 com.on('connection', function (socket) {
-	socket.emit('port',process.env.PORT);
 	//Connexion sur le chat
 	socket.on('auth', function (user) {
 		if(session.socketByUsers.has(user)){
-			var msgErreur = "L'utilisateur "+user+" existe déjà, tu dois changer de login";
-			socket.emit('erreurChat',msgErreur);
+			socket.emit('erreurChat',MESSAGE.userExistant.replace('$1',user));
 			return;
 		}
 		//On initialise des sessions permettant de gerer les relations users/sockets
 		session.idUser.push(user);
 		session.socketByUsers.set(user,socket.id);
 		session.usersBySocket.set(socket.id,user);
-		var premierMessage = messageAccueil.replace('$1',user);
+		var premierMessage = MESSAGE.accueilChat.replace('$1',user);
 		socket.emit('socketId', socket.id);
 		socket.emit('premierMessage', premierMessage);
 		socket.broadcast.emit(premierMessage);

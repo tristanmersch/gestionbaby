@@ -5,25 +5,23 @@ La liste des rencontres est récuperé de façon "brutes", il faut formater à c
 socket.on('afficherRencontres', function(rencontres) {
   var histoId ;
   var cptJoueurs = 1;
-  var isModeSolo=false,isCloture=false,cptPartiesEnCours=0;chaine="",score=0,chaineScore=" VS ";
+  var isModeSolo=false,isCloture=false,cptPartiesEnCours=0;chaine="",score=0,chaineScore="";
   document.getElementById('affichageRencontres').innerHTML='';
   for(var i=0;i<rencontres.length;i++)
   {
-    var fieldsetInitial = document.getElementById('affichageRencontres');
     //Premier passage  dans la boucle
     if(cptJoueurs == 1){
       isModeSolo = rencontres[i].isModeSolo
       isCloture = rencontres[i].dateFin != null;
 	  score = rencontres[i].score1+'-'+rencontres[i].score2;
-	  if(!isCloture)
-		chaineScore = '  <input type="text" size=1 id="'+rencontres[i].id+'score1"/> VS <input size=1 type="text" id="'+rencontres[i].id+'score2"/>  ';
+	  chaineScore = isCloture ? ' VS ' : '  <input type="text" size=1 id="'+rencontres[i].id+'score1"/> VS <input size=1 type="text" id="'+rencontres[i].id+'score2"/>  ';
     }
     //Dernier joueurs de la partie
     if(cptJoueurs == (isModeSolo ? 2 : 4 )){
       if(isModeSolo)
-      chaine+=fieldsetInitial.innerHTML+'<p class="rencontre"><label class="joueurs">'+rencontres[i-1].nomJoueur +chaineScore+rencontres[i].nomJoueur+'</label>';
+      chaine+='<p class="rencontre"><label class="joueurs">'+rencontres[i-1].nomJoueur +chaineScore+rencontres[i].nomJoueur+'</label>';
       else
-      chaine+=fieldsetInitial.innerHTML+'<p class="rencontre"><label class="joueurs">'+rencontres[i-3].nomJoueur +' et '+rencontres[i-2].nomJoueur+chaineScore+rencontres[i-1].nomJoueur +' et '+rencontres[i].nomJoueur+'</label>';
+      chaine+='<p class="rencontre"><label class="joueurs">'+rencontres[i-3].nomJoueur +' et '+rencontres[i-2].nomJoueur+chaineScore+rencontres[i-1].nomJoueur +' et '+rencontres[i].nomJoueur+'</label>';
 
       //Si la partie est en cours alors on affiche les boutons de suppression et de cloture
       if(!isCloture){
@@ -34,15 +32,13 @@ socket.on('afficherRencontres', function(rencontres) {
         var dateCourante = new Date(rencontres[i].dateFin);
         chaine+='<i>Terminée le '+ dateCourante.getDate()+'/'+dateCourante.getMonth()+'/'+dateCourante.getFullYear()+' (<b>'+score+'</b>)</i>';
       }
-      fieldsetInitial.innerHTML=chaine;
       cptJoueurs=0;
-      chaine="";
     }
     cptJoueurs++;
   }
+  document.getElementById('affichageRencontres').innerHTML=chaine;
   document.getElementById('cptPartiesEnCours').innerHTML=cptPartiesEnCours
-  document.getElementById('affichageRencontres').scrollTop = document.getElementById('affichageRencontres').scrollHeight;
-
+  document.getElementById('affichageRencontres').scrollTop = '0px';
 });
 
 function supprimerPartie(idPartieASupprimer){

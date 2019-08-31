@@ -62,13 +62,13 @@ html, body {
 #affichageRencontres
 {
   height: 550px;
-  overflow-y: scroll;
+  overflow-y: auto;
 }
 
 #affichageUsers
 {
   height: 300px;
-  overflow-y: scroll;
+  overflow-y: auto;
 }
 
 #libelleEnCours
