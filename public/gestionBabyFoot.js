@@ -32,7 +32,7 @@ socket.on('afficherRencontres', function(rencontres) {
       }
       else{
         var dateCourante = new Date(rencontres[i].dateFin);
-        chaine+='<i>Terminée le '+ dateCourante.getDate()+'/'+dateCourante.getMonth()+'/'+dateCourante.getFullYear()+' sur le score de <b>'+score+'</b></i>';
+        chaine+='<i>Terminée le '+ dateCourante.getDate()+'/'+dateCourante.getMonth()+'/'+dateCourante.getFullYear()+' (<b>'+score+'</b>)</i>';
       }
       fieldsetInitial.innerHTML=chaine;
       cptJoueurs=0;
