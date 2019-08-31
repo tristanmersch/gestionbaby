@@ -65,6 +65,4 @@ css/bootstrap.css : template css que j'ai piqué avec quelque ajustements rajout
 
 css/chat.css : ajustement pour le chat
 
-(J'admet ne pas avoir fait enormément d'effort pour bien structurer le css)
-
 Bonne change !
