@@ -3,20 +3,21 @@
 La liste des rencontres est récuperé de façon "brutes", il faut formater à ce niveau selon si la rencontre est solo ou duo
 **/
 socket.on('afficherRencontres', function(rencontres) {
-  var histoId ;
+  //Utilisé pour compter le nombre de joueur pour une partie (permet de gérer les modes solo/duo)
   var cptJoueurs = 1;
   var isModeSolo=false,isCloture=false,cptPartiesEnCours=0;chaine="",score=0,chaineScore="";
   document.getElementById('affichageRencontres').innerHTML='';
   for(var i=0;i<rencontres.length;i++)
   {
-    //Premier passage  dans la boucle
+    //On initialise les variables commune à la partie lors du passage sur le premier joueur
     if(cptJoueurs == 1){
       isModeSolo = rencontres[i].isModeSolo
       isCloture = rencontres[i].dateFin != null;
 	  score = rencontres[i].score1+'-'+rencontres[i].score2;
+	  //Affichage des champs textes scores si la partie est en cours
 	  chaineScore = isCloture ? ' VS ' : '  <input type="text" size=1 id="'+rencontres[i].id+'score1"/> VS <input size=1 type="text" id="'+rencontres[i].id+'score2"/>  ';
     }
-    //Dernier joueurs de la partie
+    //Si on itère sur le dernier joueur de la partie
     if(cptJoueurs == (isModeSolo ? 2 : 4 )){
       if(isModeSolo)
       chaine+='<p class="rencontre"><label class="joueurs">'+rencontres[i-1].nomJoueur +chaineScore+rencontres[i].nomJoueur+'</label>';
@@ -36,15 +37,14 @@ socket.on('afficherRencontres', function(rencontres) {
     }
     cptJoueurs++;
   }
-  document.getElementById('affichageRencontres').innerHTML=chaine;
-  document.getElementById('cptPartiesEnCours').innerHTML=cptPartiesEnCours
+  document.getElementById('affichageRencontres').innerHTML = chaine;
+  document.getElementById('cptPartiesEnCours').innerHTML = cptPartiesEnCours
   document.getElementById('affichageRencontres').scrollTop = '0px';
 });
 
 function supprimerPartie(idPartieASupprimer){
   socket.emit('supprimerPartie',idPartieASupprimer);
 }
-
 
 function cloturerPartie(idPartieASupprimer){
 
