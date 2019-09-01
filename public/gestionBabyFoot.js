@@ -25,7 +25,7 @@ socket.on('afficherRencontres', function(rencontres) {
     //Passage sur le dernier joueur de la partie (c'est le moment de générer la chaine d'une partie)
     if(cptJoueurs == (isModeSolo ? 2 : 4 )){
 	  //Reduction au minimum du nombre de lignes. Pour de l'affichage c'est ce que j'essaye de faire( contrairement à un code sensible côté back ou je vais plutôt privilegier la clarté).
-	  libellePartie = isModeSolo ? rencontres[i-1].nomJoueur +(isCloture ? 'VS' : htmlScore.replace(new RegExp('idRencontre_', 'g'),rencontres[i].id))+rencontres[i].nomJoueur : rencontres[i-3].nomJoueur +' et '+rencontres[i-2].nomJoueur+htmlScore.replace(new RegExp('idRencontre_', 'g'),rencontres[i].id)+rencontres[i-1].nomJoueur +' et '+rencontres[i].nomJoueur;
+	  libellePartie = isModeSolo ? rencontres[i-1].nomJoueur +(isCloture ? ' VS ' : htmlScore.replace(new RegExp('idRencontre_', 'g'),rencontres[i].id))+rencontres[i].nomJoueur : rencontres[i-3].nomJoueur +' et '+rencontres[i-2].nomJoueur+htmlScore.replace(new RegExp('idRencontre_', 'g'),rencontres[i].id)+rencontres[i-1].nomJoueur +' et '+rencontres[i].nomJoueur;
 	  blocParties += htmlPartie.replace('$partie',libellePartie) + (isCloture ? htmlCompletementPartieCloturee.replace('$dateFin',dateFinPartie.getDate()+'/'+dateFinPartie.getMonth()+'/'+dateFinPartie.getFullYear()).replace('$score',score) : htmlCompletementPartieEnCours.replace(new RegExp('idRencontre', 'g'), rencontres[i].id));
 	  !isCloture ? cptPartiesEnCours++ : '';
       cptJoueurs=0;
