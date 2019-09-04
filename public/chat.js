@@ -27,6 +27,7 @@ socket.on('listeUtilisateurs', function(users) {
 //Formatage du texte dans le chat
 function formaterMessageHTML(message,user,heure,isMessageSysteme){
 	//On utilise plus l'heure envoyée par le serveur
+	var dateCourante = new Date();
 	var heureCourante = dateCourante.getHours()+':'+dateCourante.getMinutes();
 	var infoUsers =!isMessageSysteme ? '<small class="text-muted">'+user+' à '+heureCourante+'</small>' : '';
 	message = isMessageSysteme ? message='<i>'+message+'</i>' : message;
